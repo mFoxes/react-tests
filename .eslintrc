@@ -1,0 +1,12 @@
+{
+	"plugins": ["unused-imports"],
+	"extends": ["react-app", "react-app/jest"],
+	"rules": {
+		"unused-imports/no-unused-imports": "warn",
+		"unused-imports/no-unused-vars": "warn",
+		"react/prop-types": 1, //warrning when props are missing types assignment
+		"no-console": "warn",
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "off"
+	}
+}
