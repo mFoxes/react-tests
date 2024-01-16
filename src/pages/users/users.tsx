@@ -11,7 +11,7 @@ export const Users = () => {
 			const resp = await axios.get<UserDto[]>("https://jsonplaceholder.typicode.com/users")
 			setUsers(resp.data)
 		} catch (error) {
-			console.log("[Error] ", error)
+			console.log("[Error]", error)
 		}
 	}
 
