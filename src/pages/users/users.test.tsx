@@ -1,8 +1,8 @@
 import {render, screen} from "@testing-library/react"
-import {Users} from "./users"
+import axios from "axios"
 import {userTestData} from "./constants/userTestData"
-import axios, {AxiosResponse} from "axios"
 import {UserDto} from "./types/userDto"
+import {Users} from "./users"
 
 jest.mock("axios")
 const mockedAxios = axios as jest.Mocked<typeof axios>

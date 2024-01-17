@@ -1,7 +1,8 @@
 import {Space} from "antd"
-import React, {useEffect, useState} from "react"
-import {UserDto} from "./types/userDto"
 import axios from "axios"
+import {useEffect, useState} from "react"
+import {Link} from "react-router-dom"
+import {UserDto} from "./types/userDto"
 
 export const Users = () => {
 	const [users, setUsers] = useState<UserDto[]>([])
@@ -23,7 +24,7 @@ export const Users = () => {
 		<Space direction="vertical">
 			{users.map((user) => (
 				<Space key={user.id} data-testid="user-item">
-					{user.name}
+					<Link to={`${user.id}`}>{user.name}</Link>
 				</Space>
 			))}
 		</Space>

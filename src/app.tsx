@@ -5,17 +5,30 @@ import "./app.css"
 import {appNavigates} from "./constants/appNavigates"
 import styled from "styled-components"
 import {Content} from "antd/es/layout/layout"
+import {AppNavigate} from "./types/appNavigate"
 
 const App = () => {
+	const getRoutes = (routeList: AppNavigate[]) => {
+		return routeList.map((route) => {
+			if (route.children) {
+				return <Route path={route.to}>{getRoutes(route.children)}</Route>
+			}
+
+			if (route.isIndex) {
+				return <Route index element={route.component} />
+			}
+
+			return <Route path={route.to} element={route.component} />
+		})
+	}
+
 	return (
 		<AppLayout>
 			<AppHeader />
 			<AppContent>
 				<Routes>
 					<Route path="/" element={<></>} />
-					{appNavigates.map((navigate) => (
-						<Route path={navigate.to} element={navigate.component} />
-					))}
+					{getRoutes(appNavigates)}
 				</Routes>
 			</AppContent>
 		</AppLayout>

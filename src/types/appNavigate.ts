@@ -1,9 +1,11 @@
 import {ReactNode} from "react"
 
-export interface AppNavigate {
-	to: string
-	component: ReactNode
+export type AppNavigate = {
+	to?: string
+	isIndex?: boolean
+	disableLink?: boolean
+	component?: ReactNode
 	dataTestId?: string
-	title: string
+	title?: string
 	children?: AppNavigate[]
 }

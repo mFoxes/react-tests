@@ -1,6 +1,7 @@
 import React from "react"
 import {fireEvent, render, screen} from "@testing-library/react"
 import {SimpleTests} from "./simpleTests"
+import userEvent from "@testing-library/user-event"
 
 describe("SimpleTests page test", () => {
 	test("renders title", () => {
@@ -20,7 +21,7 @@ describe("SimpleTests page test", () => {
 		const btn = screen.getByTestId("toggle-btn")
 		expect(screen.queryByTestId("toggle-elem")).toBeNull()
 		fireEvent.click(btn)
-		expect(screen.queryByTestId("toggle-elem")).toBeInTheDocument()
+		expect(screen.getByTestId("toggle-elem")).toBeInTheDocument()
 	})
 
 	test("renders input data", async () => {
