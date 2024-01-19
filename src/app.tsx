@@ -9,16 +9,21 @@ import {AppNavigate} from "./types/appNavigate"
 
 const App = () => {
 	const getRoutes = (routeList: AppNavigate[]) => {
-		return routeList.map((route) => {
+		return routeList.map((route, indx) => {
+			const key = `route-${indx}`
 			if (route.children) {
-				return <Route path={route.to}>{getRoutes(route.children)}</Route>
+				return (
+					<Route key={key} path={route.to}>
+						{getRoutes(route.children)}
+					</Route>
+				)
 			}
 
 			if (route.isIndex) {
-				return <Route index element={route.component} />
+				return <Route key={key} index element={route.component} />
 			}
 
-			return <Route path={route.to} element={route.component} />
+			return <Route key={key} path={route.to} element={route.component} />
 		})
 	}
 

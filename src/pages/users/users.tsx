@@ -21,10 +21,11 @@ export const Users = () => {
 	}, [])
 
 	return (
-		<Space direction="vertical">
+		<Space direction="vertical" data-testid="users-page">
 			{users.map((user) => (
 				<Space key={user.id} data-testid="user-item">
-					<Link to={`${user.id}`}>{user.name}</Link>
+					{user.name}
+					{/* <Link to={`${user.id}`}>{user.name}</Link> */}
 				</Space>
 			))}
 		</Space>

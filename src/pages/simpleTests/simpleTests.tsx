@@ -22,7 +22,7 @@ export const SimpleTests = () => {
 	}, [])
 
 	return (
-		<Space direction="vertical">
+		<Space direction="vertical" data-testid="simple-tests-page">
 			<Typography.Title>Title</Typography.Title>
 
 			{data && <Space>data</Space>}

@@ -6,7 +6,7 @@ import {appNavigates} from "../../constants/appNavigates"
 import {AppNavigate} from "../../types/appNavigate"
 
 export const AppHeader = () => {
-	const getLinks = (routeList: AppNavigate[], parentPath?: string): ReactNode[] => {
+	const getLinks = (routeList: AppNavigate[], parentPath: string = ""): ReactNode[] => {
 		return routeList
 			.filter((route) => !route.disableLink)
 			.map((route) => {
@@ -15,7 +15,7 @@ export const AppHeader = () => {
 				}
 
 				return (
-					<Link to={route.to ?? parentPath ?? ""} data-testid={route.dataTestId}>
+					<Link to={route.to ?? parentPath} key={route.to ?? parentPath} data-testid={route.dataTestId}>
 						{route.title}
 					</Link>
 				)

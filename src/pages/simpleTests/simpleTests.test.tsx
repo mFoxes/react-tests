@@ -9,13 +9,11 @@ describe("SimpleTests page test", () => {
 		const titleElement = screen.getByText(/Title/i)
 		expect(titleElement).toBeInTheDocument()
 	})
-
 	test("renders data", async () => {
 		render(<SimpleTests />)
 		const dataElement = await screen.findByText(/data/i)
 		expect(dataElement).toBeInTheDocument()
 	})
-
 	test("renders toggle data", async () => {
 		render(<SimpleTests />)
 		const btn = screen.getByTestId("toggle-btn")
@@ -23,12 +21,12 @@ describe("SimpleTests page test", () => {
 		fireEvent.click(btn)
 		expect(screen.getByTestId("toggle-elem")).toBeInTheDocument()
 	})
-
 	test("renders input data", async () => {
 		render(<SimpleTests />)
 		const input = screen.getByTestId("print-input")
 		expect(screen.queryByTestId("print-elem")).toContainHTML("")
-		fireEvent.input(input, {target: {value: "test"}})
+		// fireEvent.input(input, {target: {value: "test"}})
+		userEvent.type(input, "test")
 		expect(screen.queryByTestId("print-elem")).toContainHTML("test")
 	})
 })

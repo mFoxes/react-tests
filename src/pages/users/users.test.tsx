@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react"
+import {render, screen, waitFor} from "@testing-library/react"
 import axios from "axios"
 import {userTestData} from "./constants/userTestData"
 import {UserDto} from "./types/userDto"
@@ -8,6 +8,8 @@ jest.mock("axios")
 const mockedAxios = axios as jest.Mocked<typeof axios>
 
 describe("Users page test", () => {
+	const renderComponent = () => render(<Users />)
+
 	let response: {data: UserDto[]} = {
 		data: [],
 	}
@@ -16,9 +18,13 @@ describe("Users page test", () => {
 			data: userTestData,
 		}
 	})
+	afterEach(() => {
+		jest.clearAllMocks()
+	})
 	test("renders users", async () => {
 		mockedAxios.get.mockResolvedValue(response)
-		render(<Users />)
+		renderComponent()
+
 		const users = await screen.findAllByTestId("user-item")
 		expect(users.length).toBe(10)
 		expect(mockedAxios.get).toBeCalledTimes(1)

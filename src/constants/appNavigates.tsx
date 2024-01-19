@@ -1,3 +1,4 @@
+import {Posts} from "../pages/posts/posts"
 import {SimpleTests} from "../pages/simpleTests/simpleTests"
 import {User} from "../pages/users/subPages/user/user"
 import {Users} from "../pages/users/users"
@@ -12,10 +13,10 @@ export const appNavigates: AppNavigate[] = [
 	},
 	{
 		to: "users",
-		dataTestId: "navigate-users",
 		children: [
 			{
 				isIndex: true,
+				dataTestId: "navigate-users",
 				component: <Users />,
 				title: "Users",
 			},
@@ -25,5 +26,11 @@ export const appNavigates: AppNavigate[] = [
 				component: <User />,
 			},
 		],
+	},
+	{
+		to: "posts",
+		component: <Posts />,
+		dataTestId: "navigate-posts",
+		title: "Posts",
 	},
 ]
