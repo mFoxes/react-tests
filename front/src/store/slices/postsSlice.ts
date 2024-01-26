@@ -9,11 +9,21 @@ const sliceName = "posts"
 interface PostsState {
 	posts: ResponsePostDto[]
 
+	selectedPost: ResponsePostDto | null
+
+	isDtoModalOpen: boolean
+	isConfirmationModalOpen: boolean
+
 	isLoading: LoadingState
 }
 
 const initialState: PostsState = {
 	posts: [],
+
+	selectedPost: null,
+
+	isDtoModalOpen: false,
+	isConfirmationModalOpen: false,
 
 	isLoading: LoadingState.Empty,
 }
@@ -37,7 +47,7 @@ export const createPost = createAsyncThunk<ResponsePostDto, {data: PostDto}>(`${
 	}
 })
 
-export const updatePost = createAsyncThunk<ResponsePostDto, {data: PostDto; queryParams: {id: string}}>(
+export const updatePost = createAsyncThunk<ResponsePostDto, {data: PostDto; queryParams: {id: number}}>(
 	`${sliceName}/updatePost`,
 	async (params, thunkApi) => {
 		try {
@@ -50,7 +60,7 @@ export const updatePost = createAsyncThunk<ResponsePostDto, {data: PostDto; quer
 	}
 )
 
-export const deletePost = createAsyncThunk<void, {params: {id: string}}>(`${sliceName}/getPosts`, async (params, thunkApi) => {
+export const deletePost = createAsyncThunk<void, {id: number}>(`${sliceName}/deletePost`, async (params, thunkApi) => {
 	try {
 		const resp = await postApi.deletePost(params)
 		return resp.data
@@ -65,6 +75,15 @@ const postsSlice = createSlice({
 	reducers: {
 		setInitialState: () => {
 			return initialState
+		},
+		setSelectedPost: (state, action) => {
+			state.selectedPost = action.payload
+		},
+		setIsDtoModalState: (state, action) => {
+			state.isDtoModalOpen = action.payload
+		},
+		setIsConfirmationModalState: (state, action) => {
+			state.isConfirmationModalOpen = action.payload
 		},
 	},
 	extraReducers: (builder) => {
@@ -111,5 +130,5 @@ const postsSlice = createSlice({
 	},
 })
 
-export const {setInitialState} = postsSlice.actions
+export const {setInitialState, setSelectedPost, setIsDtoModalState, setIsConfirmationModalState} = postsSlice.actions
 export const postsReducer = postsSlice.reducer
